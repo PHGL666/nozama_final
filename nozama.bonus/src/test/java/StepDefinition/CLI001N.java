@@ -7,13 +7,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import Utilities.Disconnection;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class Steps {
+public class CLI001N {
 	WebDriver driver;
 
+	@After
+	public void disconnect() {
+		Disconnection.disconnect(driver);
+	}
+	
 	@Given("^navigateur Chrome ouvert et application sur homepage$")
 	public void navigateur_Chrome_ouvert_et_application_sur_homepage() /* throws Throwable */ {
 
