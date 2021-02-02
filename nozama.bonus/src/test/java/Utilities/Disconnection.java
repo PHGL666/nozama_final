@@ -14,5 +14,6 @@ public class Disconnection {
 		}
 		driver.findElement(By.linkText("Se déconnecter")).click();
 		driver.close();
+		//driver.quit();
 	}
 }
