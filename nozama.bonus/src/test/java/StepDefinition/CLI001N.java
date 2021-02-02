@@ -1,21 +1,34 @@
 package StepDefinition;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import Utilities.Constants;
 import Utilities.Disconnection;
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class CLI001N {
 	WebDriver driver;
-
+	String URL = Constants.URL;
+	
+	@Before
+	public void setupDriver() {
+		System.out.println("Le navigateur Chrome est ouvert");
+		System.setProperty("webdriver.chrome.driver", "S:\\TESTEUR INFORMATIQUE\\7_SELENIUM\\Chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+	
 	@After
 	public void disconnect() {
 		Disconnection.disconnect(driver);
@@ -23,12 +36,8 @@ public class CLI001N {
 	
 	@Given("^navigateur Chrome ouvert et application sur homepage$")
 	public void navigateur_Chrome_ouvert_et_application_sur_homepage() /* throws Throwable */ {
-
-		System.out.println("Le navigateur Chrome est ouvert");
-		System.setProperty("webdriver.chrome.driver", "S:\\TESTEUR INFORMATIQUE\\7_SELENIUM\\Chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get("http://127.0.0.1/nozama");
+	
+		driver.get(URL);
 		{
 			List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'block-user-0\']/div/h2"));
 			assert (elements.size() > 0);
