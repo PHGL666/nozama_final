@@ -19,15 +19,13 @@ import cucumber.api.java.en.When;
 public class CLI001N {
 	WebDriver driver;
 	String URL = Constants.URL;
-	
+
+	/* ON UTILISE PAS LE BEFORE CAR CA FAIT BUGER LORDRE DEXECUTION DES STEPS
 	@Before
 	public void setupDriver() {
-		System.out.println("Le navigateur Chrome est ouvert");
-		System.setProperty("webdriver.chrome.driver", "S:\\TESTEUR INFORMATIQUE\\7_SELENIUM\\Chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
 	}
+	*/
 	
 	@After
 	public void disconnect() {
@@ -36,8 +34,12 @@ public class CLI001N {
 	
 	@Given("^navigateur Chrome ouvert et application sur homepage$")
 	public void navigateur_Chrome_ouvert_et_application_sur_homepage() /* throws Throwable */ {
-	
+		System.out.println("Le navigateur Chrome est ouvert");
+		System.setProperty("webdriver.chrome.driver", "S:\\TESTEUR INFORMATIQUE\\7_SELENIUM\\Chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		driver.get(URL);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		{
 			List<WebElement> elements = driver.findElements(By.xpath("//div[@id=\'block-user-0\']/div/h2"));
 			assert (elements.size() > 0);
